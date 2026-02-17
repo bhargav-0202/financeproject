@@ -54,43 +54,6 @@ src/
 
 ### Python Style Guide
 
-Follow **PEP 8** with these additional guidelines:
-
-```python
-# ✅ DO: Clear, descriptive names
-def calculate_payment_history_score(repayments_df, loans_df):
-    """Calculate payment history score based on repayment patterns."""
-    pass
-
-# ❌ DON'T: Unclear abbreviations
-def calc_ph_score(rdf, ldf):
-    pass
-
-# ✅ DO: Comprehensive docstrings
-def preprocess_data(raw_data):
-    """
-    Preprocess raw data for modeling.
-    
-    Args:
-        raw_data: Input DataFrame with raw records
-        
-    Returns:
-        DataFrame: Cleaned data ready for modeling
-        
-    Raises:
-        ValueError: If data validation fails
-    """
-    pass
-
-# ✅ DO: Type hints
-def load_data(filepath: str, format_type: str = 'csv') -> DataFrame:
-    pass
-
-# ❌ DON'T: Missing types
-def load_data(filepath, format_type='csv'):
-    pass
-```
-
 ### Import Organization
 
 ```python
@@ -260,13 +223,13 @@ class LoanScorer:
 # ✅ DO: Use partitioning
 df.repartition(10).write.parquet(output_path)
 
-# ❌ DON'T: Process unpartitioned data
+#  DON'T: Process unpartitioned data
 df.write.parquet(output_path)
 
 # ✅ DO: Select necessary columns early
 df.select(['member_id', 'score']).write.parquet(...)
 
-# ❌ DON'T: Select all columns
+#  DON'T: Select all columns
 df.write.parquet(...)
 
 # ✅ DO: Use caching for reused DataFrames
@@ -274,7 +237,7 @@ df = df.cache()
 result1 = df.filter(...)
 result2 = df.groupBy(...)
 
-# ❌ DON'T: Recompute same DataFrame
+#  DON'T: Recompute same DataFrame
 result1 = df.filter(...)
 result2 = df.groupBy(...)  # Recomputes df
 ```
@@ -324,7 +287,7 @@ df.select([count(when(col(c).isNull(), c)).alias(c) for c in df.columns]).show()
 
 Update version in:
 - `src/__init__.py`
-- `setup.py` (if exists)
+- `setup.py`
 - `README.md`
 
 ### Creating a Release
@@ -366,6 +329,4 @@ export SPARK_EXECUTOR_MEMORY=8g
 - [Pytest Documentation](https://docs.pytest.org/)
 - [Apache Spark SQL Documentation](https://spark.apache.org/sql/)
 
-## Contact
 
-For questions or suggestions, please open an issue in the repository.
